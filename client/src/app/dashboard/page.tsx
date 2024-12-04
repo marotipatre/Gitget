@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import { RepositoryList } from "@/components/RepositoryList";
-import { CreateBountyButton } from "@/components/CreateBountyButton";
+import { CreateBountyModal } from "@/components/CreateBountyModal";
 
 export default async function Dashboard() {
   const session = await getServerSession(authOptions);
@@ -12,7 +12,7 @@ export default async function Dashboard() {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Your Repositories</h1>
-        <CreateBountyButton />
+        <CreateBountyModal />
       </div>
       <RepositoryList accessToken={session?.accessToken} />
     </div>

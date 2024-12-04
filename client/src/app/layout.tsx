@@ -7,7 +7,7 @@ import "@rainbow-me/rainbowkit/styles.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "PullPerks - Hackathon Bounty Platform",
+  title: "GITget - Hackathon Bounty Platform",
   description: "Distribute hackathon prizes based on GitHub contributions",
 };
 
@@ -20,9 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-            <main className="min-h-screen bg-gray-50">
-              {children}
-            </main>
+          <main className="min-h-screen bg-gray-50">{children}</main>
         </Providers>
       </body>
     </html>
