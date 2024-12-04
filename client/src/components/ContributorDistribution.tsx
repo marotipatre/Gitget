@@ -32,8 +32,10 @@ export function ContributorDistribution({
   const [tokenAddress, setTokenAddress] = useState("");
 
   const [percentageArray, setPercentageArray] = useState<number[]>([]);
-
+  
   const [tokenDetails, setTokenDetails] = useState<any>({});
+
+  const [confirmations, setConfirmations] = useState<number>(10);
 
   useEffect(() => {
     async function fetchContributors() {
@@ -133,6 +135,29 @@ export function ContributorDistribution({
     );
   }
 
+  const handlePaste = async (event: any) => {
+    event.preventDefault();
+    const pastedData = event.clipboardData.getData("text");
+    setTokenAddress(pastedData);
+    console.log("Pasted Data", pastedData);
+
+    // Fetch token details after pasting
+    const result = await getTokenDetails(pastedData);
+    console.log("Token Details", result);
+    setTokenDetails(result);
+  };
+
+  // Optionally, fetch token details during manual input
+  const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+    setTokenAddress(inputValue);
+
+    if (inputValue) {
+      const result = await getTokenDetails(inputValue);
+      console.log("Token Details", result);
+      setTokenDetails(result);
+    }
+  };
   return (
     <div className="space-y-6">
       <div className="bg-white p-6 rounded-lg shadow-sm">
@@ -153,45 +178,54 @@ export function ContributorDistribution({
 
             <Input
               type="text"
-              value={tokenAddress}
               placeholder="Bounty Token Address"
-              onChange={async (e) => {
-                setTokenAddress(e.target.value);
-                if (tokenAddress) {
-                  let result = await getTokenDetails(tokenAddress);
-                  console.log("Token Details", result);
-                  setTokenDetails(result);
-                }
-              }}
+              onChange={handleChange}
+              value={tokenAddress}
+              onPaste={handlePaste}
               className="w-64"
             />
           </div>
         </div>
-        <div className="p-3 flex">
-          <div className="flex flex-col space-y-2">
-            <div className="flex items-center space-x-2">
-              <span className="text-md text-gray-500 font-bold">
-                Token Name
-              </span>
-              <span className="text-md text-green-500">
-                {tokenDetails?.name}
-              </span>
-              <span className="text-md text-gray-500 font-bold">
-                Token Symbol
-              </span>
-              <span className="text-md text-green-500">
-                {tokenDetails?.symbol}
-              </span>
-              <span className="text-md text-gray-500 font-bold">
-                Token Balance
-              </span>
-              <span className="text-md text-green-500">
-                {tokenDetails?.balance / 1e18}
-              </span>
+        {tokenDetails?.name && (
+          <>
+            <div className="p-3 flex">
+              <div className="flex flex-col space-y-2">
+                <div className="flex items-center space-x-2">
+                  <div className="flex flex-col text-center p-8 shadow-md rounded-md space-y-4">
+                    <span className="text-md text-gray-500 font-bold ">
+                      Token Name
+                    </span>
+                    <span className="text-md text-black font-bold">
+                      {tokenDetails?.name}
+                    </span>
+                  </div>
+                  <div className="flex flex-col text-center p-8 shadow-md rounded-md space-y-4">
+                    <span className="text-md text-gray-500 font-bold">
+                      Token Symbol
+                    </span>
+                    <span className="text-md text-black font-bold">
+                      {tokenDetails?.symbol}
+                    </span>
+                  </div>
+                  <div className="flex flex-col text-center p-8 shadow-md rounded-md space-y-4">
+                    <span className="text-md text-gray-500 font-bold">
+                      Token Balance
+                    </span>
+                    <span className="text-xl text-balck font-bold">
+                      {(tokenDetails?.balance / 1e18).toFixed(2)}
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-
+            <div className="px-4 font-bold text-blue-400 mb-4 mt-4">
+              {" "}
+              {tokenDetails && (
+                <>Get Ready for {tokenDetails?.name} Git Airdrop !!!</>
+              )}
+            </div>
+          </>
+        )}
         <div className="space-y-4">
           {contributors.map((contributor) => (
             <div
@@ -213,7 +247,8 @@ export function ContributorDistribution({
                     {contributor.contributionPercentage}% contribution (
                     {contributor.contributions.commits} commits,{" "}
                     {contributor.contributions.pullRequests} PRs,{" "}
-                    {contributor.contributions.reviews} reviews)
+                    {contributor.contributions.reviews} reviews,
+                    <span className="text-violet-400">{confirmations}/10 Confirmations)</span>
                   </div>
                 </div>
               </div>

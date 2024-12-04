@@ -15,7 +15,6 @@ export default async function RepositoryPage({
   return (
     <div className="space-y-6">
       <RepositoryHeader repositoryId={id} />
-
       <ContributorDistribution
         repositoryId={id}
         accessToken={session?.accessToken}
