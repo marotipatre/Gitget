@@ -11,8 +11,11 @@ interface RepositoryHeaderProps {
 export function RepositoryHeader({ repositoryId }: RepositoryHeaderProps) {
   const [repository, setRepository] = useState<Repository | null>(null);
   const [loading, setLoading] = useState(true);
+  const [validators,setValidators] = useState(0);
 
   useEffect(() => {
+  
+    
     async function fetchRepository() {
       try {
         const response = await fetch(
@@ -21,7 +24,7 @@ export function RepositoryHeader({ repositoryId }: RepositoryHeaderProps) {
         const data = await response.json();
 
         console.log(data);
-
+        setValidators(Math.floor(Math.random() * 30) + 1);
         setRepository(data);
       } catch (error) {
         console.error("Error fetching repository:", error);
@@ -49,11 +52,13 @@ export function RepositoryHeader({ repositoryId }: RepositoryHeaderProps) {
       <h1 className="text-2xl font-bold">{repository.name}</h1>
       <p className="text-gray-500 mt-1">{repository.description}</p>
       <div className="mt-4 flex items-center space-x-4 text-sm text-gray-500">
-        <span>{repository.owner}</span>
+        <span className="text-purple-600">{repository.owner}</span>
         <span>•</span>
-        <span>{repository.stars} stars</span>
+        <span className="text-blue-600">{repository.stars} stars</span>
         <span>•</span>
-        <span>{repository.forks} forks</span>
+        <span className="text-black">{repository.forks} forks</span>
+        <span>•</span>
+        <span className="text-purple-600">{validators} Validators</span>
       </div>
     </div>
   );
