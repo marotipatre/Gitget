@@ -1,7 +1,22 @@
 export const projects = [
     // Live Projects - Web3
+    
+    {
+        id: 1,
+        name: 'EduChain Open Campus',
+        description: 'A decentralized platform for educational content, connecting educators and learners globally using blockchain technology.',
+        category: 'Live',
+        rewards: '$8,000',
+        contributors: [
+          { name: 'Sophia Lee', contributions: 120 },
+          { name: 'Michael Tan', contributions: 100 },
+          { name: 'Emma Rodriguez', contributions: 80 },
+        ],
+        repoUrl: 'https://github.com/EduChainOpenCampus',
+        imageUrl: 'https://th.bing.com/th/id/OIP.1WAsSbEKRC-4DnPaE5msGgHaHa?rs=1&pid=ImgDetMain'
+      },
     { 
-      id: 1, 
+      id: 2, 
       name: 'Lens Protocol', 
       description: 'A composable and decentralized social graph.', 
       category: 'Live', 
@@ -15,7 +30,7 @@ export const projects = [
       imageUrl: 'https://static.images.dropstab.com/images/lens-protocol.png'
     },
     { 
-      id: 2, 
+      id: 3, 
       name: 'Uniswap V4', 
       description: 'A decentralized trading protocol with concentrated liquidity.', 
       category: 'Live', 
@@ -29,7 +44,7 @@ export const projects = [
       imageUrl: 'https://cryptologos.cc/logos/uniswap-uni-logo.png'
     },
     { 
-      id: 3, 
+      id: 4, 
       name: 'The Graph', 
       description: 'A decentralized protocol for indexing blockchain data.', 
       category: 'Live', 
@@ -43,7 +58,7 @@ export const projects = [
       imageUrl: 'https://cryptologos.cc/logos/the-graph-grt-logo.png'
     },
     { 
-      id: 4, 
+      id: 5, 
       name: 'Aave Protocol', 
       description: 'A decentralized non-custodial liquidity protocol.', 
       category: 'Live', 
@@ -57,7 +72,7 @@ export const projects = [
       imageUrl: 'https://cryptologos.cc/logos/aave-aave-logo.png'
     },
     { 
-      id: 5, 
+      id: 21, 
       name: 'Optimism', 
       description: 'A layer-2 scaling solution for Ethereum.', 
       category: 'Live', 
@@ -271,6 +286,7 @@ export const projects = [
         repoUrl: 'https://github.com/aragon/aragon',
         imageUrl: 'https://striking-kindness-e0d93214bb.media.strapiapp.com/Aragon_AI_logo_394adfbcda.jpg'
       },
+
 
   ];
   
