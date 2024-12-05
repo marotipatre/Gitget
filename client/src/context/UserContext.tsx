@@ -115,6 +115,8 @@ const DataContextProvider: React.FC<DataContextProviderProps> = ({
           tokenAddress
         );
         await tx.wait();
+
+        return tx;
       }
 
       

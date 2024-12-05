@@ -36,7 +36,7 @@ export function ContributorDistribution({
   const [tokenDetails, setTokenDetails] = useState<any>({});
 
   const [confirmations, setConfirmations] = useState<number>(10);
-
+  const [txHash, setTxHash] = useState("");
   useEffect(() => {
     async function fetchContributors() {
       try {
@@ -84,13 +84,19 @@ export function ContributorDistribution({
       return;
     }
 
-    await distributeFunds(
+    let tx = await distributeFunds(
       _walletAddresses,
       address,
       getPercentageArray,
       totalBounty,
       tokenAddress
     );
+
+    console.log("Transaction Hash", tx.hash);
+    setTxHash(tx.hash);
+
+
+
   };
 
   const handleWalletAddressChange = (
@@ -292,6 +298,7 @@ export function ContributorDistribution({
             Distribute Bounty
           </button>
         </div>
+        {txHash && <div className="text-blue-500">{`https://edu-chain-testnet.blockscout.com/tx/${txHash}`}</div>}
       </div>
     </div>
   );
