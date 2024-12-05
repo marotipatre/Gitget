@@ -6,7 +6,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Input } from "@/components/ui/input";
 import { ethers } from "ethers";
 import { useAccount, useWriteContract } from "wagmi";
-
+import { toast } from "react-hot-toast";
 import Image from "next/image";
 import { useDataContext } from "@/context/UserContext";
 
@@ -32,7 +32,7 @@ export function ContributorDistribution({
   const [tokenAddress, setTokenAddress] = useState("");
 
   const [percentageArray, setPercentageArray] = useState<number[]>([]);
-  
+
   const [tokenDetails, setTokenDetails] = useState<any>({});
 
   const [confirmations, setConfirmations] = useState<number>(10);
@@ -63,6 +63,7 @@ export function ContributorDistribution({
     walletAddresses: any,
     totalBounty: number
   ) => {
+    let id = toast.loading("Distributing Funds...");
     let getPercentageArray = contributors.map((contributor) => {
       return Math.floor(contributor?.contributionPercentage);
     });
@@ -83,20 +84,20 @@ export function ContributorDistribution({
       console.log("Token Address is required");
       return;
     }
-
-    let tx = await distributeFunds(
-      _walletAddresses,
-      address,
-      getPercentageArray,
-      totalBounty,
-      tokenAddress
-    );
-
-    console.log("Transaction Hash", tx.hash);
-    setTxHash(tx.hash);
-
-
-
+    try {
+      let tx = await distributeFunds(
+        _walletAddresses,
+        address,
+        getPercentageArray,
+        totalBounty,
+        tokenAddress
+      );
+      console.log("Transaction Hash", tx.hash);
+      setTxHash(tx.hash);
+      toast.success("Funds Distributed Successfully", { id });
+    } catch (error) {
+      toast.error("Failed to distribute funds", { id });
+    }
   };
 
   const handleWalletAddressChange = (
@@ -254,7 +255,9 @@ export function ContributorDistribution({
                     {contributor.contributions.commits} commits,{" "}
                     {contributor.contributions.pullRequests} PRs,{" "}
                     {contributor.contributions.reviews} reviews,
-                    <span className="text-violet-400">{confirmations}/10 Confirmations)</span>
+                    <span className="text-violet-400">
+                      {confirmations}/10 Confirmations)
+                    </span>
                   </div>
                 </div>
               </div>
@@ -298,7 +301,9 @@ export function ContributorDistribution({
             Distribute Bounty
           </button>
         </div>
-        {txHash && <div className="text-blue-500">{`https://edu-chain-testnet.blockscout.com/tx/${txHash}`}</div>}
+        {txHash && (
+          <div className="text-blue-500">{`https://edu-chain-testnet.blockscout.com/tx/${txHash}`}</div>
+        )}
       </div>
     </div>
   );

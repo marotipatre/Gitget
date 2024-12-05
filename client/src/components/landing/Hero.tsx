@@ -135,10 +135,8 @@ export function Hero() {
                     className="ml-4"
                   />
                 </div>
-                <p className="mt-2 text-base text-gray-500 sm:mt-3 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-3 md:text-xl lg:mx-0">
-                  Distribute hackathon prizes and bounties based on actual
-                  GitHub contributions. Automate reward distribution with smart
-                  contracts and blockchain technology.
+                <p className="mt-0 text-base text-gray-500 sm:mt-0 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-0 md:text-xl lg:mx-0">
+                We are Git Get, a platform empowering developers to contribute effectively while providing project managers with a seamless way to distribute funds. With just a click, funds are allocated based on a fair contribution system. Simplifying collaboration and rewarding impact.
                 </p>
                 <div className="mt-3 sm:mt-5 sm:flex sm:justify-center lg:justify-start">
                   <div className="rounded-md shadow">
