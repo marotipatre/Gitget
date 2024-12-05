@@ -12,7 +12,7 @@ export const projects = [
           { name: 'Michael Tan', contributions: 100 },
           { name: 'Emma Rodriguez', contributions: 80 },
         ],
-        repoUrl: 'https://github.com/EduChainOpenCampus',
+        repoUrl: 'https://github.com/TeamOpencampus/opencampus-website',
         imageUrl: 'https://th.bing.com/th/id/OIP.1WAsSbEKRC-4DnPaE5msGgHaHa?rs=1&pid=ImgDetMain'
       },
     { 
