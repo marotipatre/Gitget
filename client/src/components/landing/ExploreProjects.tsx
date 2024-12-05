@@ -7,50 +7,12 @@ import { Button } from "@/components/ui/button"
 import { ProjectDetailsModal } from '../ProjectDetailsModal'
 import { CreateProfileModal } from '../CreateProfileModal'
 import { Switch } from "@/components/ui/switch"
+import { projects } from "./ProjectData"
+import Image from 'next/image'
 
 const projectCategories = ['Past', 'Live', 'Upcoming']
 
-const projects = [
-  { 
-    id: 1, 
-    name: 'Project A', 
-    description: 'A cool open source project', 
-    category: 'Live', 
-    rewards: '$500',
-    contributors: [
-      { name: 'Alice', contributions: 50 },
-      { name: 'Bob', contributions: 30 },
-      { name: 'Charlie', contributions: 20 },
-    ],
-    repoUrl: 'https://github.com/example/project-a'
-  },
-  { 
-    id: 2, 
-    name: 'Project B', 
-    description: 'An awesome library', 
-    category: 'Upcoming', 
-    rewards: '$1000',
-    contributors: [
-      { name: 'David', contributions: 40 },
-      { name: 'Eve', contributions: 35 },
-      { name: 'Frank', contributions: 25 },
-    ],
-    repoUrl: 'https://github.com/example/project-b'
-  },
-  { 
-    id: 3, 
-    name: 'Project C', 
-    description: 'A completed project', 
-    category: 'Past', 
-    rewards: '$750',
-    contributors: [
-      { name: 'Grace', contributions: 60 },
-      { name: 'Henry', contributions: 40 },
-      { name: 'Ivy', contributions: 30 },
-    ],
-    repoUrl: 'https://github.com/example/project-c'
-  },
-]
+
 
 export function ExploreProjects() {
   const [activeCategory, setActiveCategory] = useState('Live')
@@ -85,13 +47,25 @@ export function ExploreProjects() {
               {projects
                 .filter((project) => project.category === category)
                 .map((project) => (
-                  <Card key={project.id}>
-                    <CardHeader>
-                      <CardTitle>{project.name}</CardTitle>
-                      <CardDescription>{project.description}</CardDescription>
+                  <Card 
+                    key={project.id} 
+                    className="transition-all duration-300 ease-in-out hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] hover:-translate-y-1"
+                  >
+                    <CardHeader className="flex flex-row items-center space-x-4 pb-2">
+                    <Image
+                        src={project.imageUrl}
+                        alt={`${project.name} logo`}
+                        width={64}
+                        height={64}
+                        className="rounded-full"
+                      />
+                      <div>
+                        <CardTitle>{project.name}</CardTitle>
+                        <CardDescription>{project.description}</CardDescription>
+                      </div>
                     </CardHeader>
                     <CardContent>
-                      <p>Rewards: {project.rewards}</p>
+                      <p className="font-semibold text-blue-600">Rewards: {project.rewards}</p>
                     </CardContent>
                     <CardFooter>
                       <ProjectDetailsModal project={project} />

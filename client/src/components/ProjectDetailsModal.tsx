@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import Image from 'next/image'
 
 interface Contributor {
   name: string;
@@ -17,6 +18,7 @@ interface ProjectDetails {
   rewards: string;
   contributors: Contributor[];
   repoUrl: string;
+  imageUrl: string;
 }
 
 const contributionData = [
@@ -35,9 +37,18 @@ export function ProjectDetailsModal({ project }: { project: ProjectDetails }) {
         <Button variant="outline">View Details</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[600px]">
-        <DialogHeader>
-          <DialogTitle>{project.name}</DialogTitle>
-          <DialogDescription>{project.description}</DialogDescription>
+      <DialogHeader className="flex flex-row items-center space-x-4">
+          <Image
+            src={project.imageUrl}
+            alt={`${project.name} logo`}
+            width={64}
+            height={64}
+            className="rounded-full"
+          />
+          <div>
+            <DialogTitle>{project.name}</DialogTitle>
+            <DialogDescription>{project.description}</DialogDescription>
+          </div>
         </DialogHeader>
         <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
           <Card>
